@@ -1,0 +1,44 @@
+/* ============================================================
+   Paste this into Extensions > Apps Script in your Google Sheet.
+   Then deploy as a Web App (see instructions below).
+   ============================================================ */
+
+function doPost(e) {
+  try {
+    var params = e.parameter;
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+    if (params.type === 'wish') {
+      var wishSheet = ss.getSheetByName('Wishes');
+      wishSheet.appendRow([
+        new Date(),
+        params.from || 'A guest',
+        params.message || ''
+      ]);
+    } else {
+      var rsvpSheet = ss.getSheetByName('RSVP');
+      rsvpSheet.appendRow([
+        new Date(),
+        params.name || '',
+        params.phone || '',
+        params.guests || '',
+        params.attending || ''
+      ]);
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: 'success' }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: 'error', message: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'Wedding RSVP endpoint is live' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}

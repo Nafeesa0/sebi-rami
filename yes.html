@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>See You There — Wedding Invitation</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body{ min-height:100svh; display:flex; align-items:center; justify-content:center; text-align:center; padding: 40px; background: var(--ivory); }
+  .rsvp-page{ max-width: 520px; }
+  .rsvp-page .icon{ width:76px; height:76px; border-radius:50%; border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; margin:0 auto 26px; }
+  .rsvp-page h1{ font-family: var(--f-script); font-size: clamp(40px,7vw,60px); font-weight:400; }
+  .rsvp-page p{ margin-top: 16px; color:#5b5049; font-size:19px; }
+  .rsvp-page .back{ display:inline-block; margin-top: 34px; font-family: var(--f-eyebrow); font-size:11px; letter-spacing:.25em; text-transform:uppercase; border:1px solid var(--gold); padding:14px 30px; transition: background .3s, color .3s; }
+  .rsvp-page .back:hover{ background: var(--gold); color: var(--white); }
+</style>
+</head>
+<body>
+  <div class="rsvp-page">
+    <div class="icon">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C8A46A" stroke-width="1.8"><path d="M4 12l5 5L20 6"/></svg>
+    </div>
+    <h1>We Can't Wait</h1>
+    <p id="guest-msg">Thank you for confirming — your presence will make our celebration complete.</p>
+    <p style="font-size:15px; color:#8b8078;">A calendar reminder and venue details have been shared above — see you there.</p>
+    <a href="index.html#venue" class="back">Back To Invitation</a>
+  </div>
+  <script>
+    try {
+      const name = localStorage.getItem('guestName');
+      if (name) {
+        document.getElementById('guest-msg').textContent =
+          `Thank you, ${name} — we can't wait to celebrate with you.`;
+      }
+    } catch(e){}
+  </script>
+</body>
+</html>
